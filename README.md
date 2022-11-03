@@ -39,19 +39,33 @@ The consideration of processing delays can be enabled/disabled by the parameter 
 
 ## Example
 
-We assume that a \SI{360}{\degree} scanning LiDAR sensor ($\alpha_{\text{start}} = \SI{0}{\degree}$, $\alpha_{\text{end}}=\SI{360}{\degree}$) starts with a single scan process while having a heading of $\Theta_{i-1} = \SI{0}{\degree}$ at point $S$.
-Till the end of the scan process, the LiDAR moves laterally and angular along a quarter-circle ($b$) with a radius $r=10$.
-At the end of the scan, the sensor reaches position $E$ and has a heading of $\Theta_{i} = \SI{90}{\degree}$.
-The sensor was able to measure a point $P$ from position $Z$ under a angle of $\alpha = \SI{180}{\degree}$, while having a heading of $\Theta_\alpha = \SI{45}{\degree}$.
-The LiDAR records $P$ at ${}^\alpha _\alpha r_M =  \begin{bmatrix} -4.137 & 0 & 0 \end{bmatrix}^T$.
+We assume that a 360° scanning LiDAR sensor (
+$\alpha_{\text{start}} = 0°$, 
+$\alpha_{\text{end}}=360°$
+) starts with a single scan process while having a heading of $\Theta_{i-1} = 0°$ at point $S$.
+Till the end of the scan process, the LiDAR moves laterally and angular along a quarter-circle (
+$b$
+) with a radius $r=10$.
+At the end of the scan, the sensor reaches position $E$ and has a heading of $\Theta_{i} = 90°$.
+The sensor was able to measure a point $P$ from position $Z$ under a angle of $\alpha = 180°$, while having a heading of $\Theta_\alpha = 45°$.
+The LiDAR records $P$ at 
+
+$$\prescript{\alpha}{\alpha} r_{M} = \begin{bmatrix} -4.137 & 0 & 0 \end{bmatrix}^T.$$
+
+![Lidar distortion example](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/figures/distortion_example.png)
 
 At position $E$, once the whole point cloud is available, the distortion correction needs to be applied: the recorded coordinates of $P$ are not valid anymore.
 All in the following steps used equations are explained in detail in our paper.
 First we calculate the correction factor $c$
+
 $$c = 1-\left|\frac{\alpha-\alpha_{\text{start}}}{\alpha_{\text{end}} - \alpha_{\text{start}}}\right| = 1 - \left|\frac{\pi-0}{2\pi-0}\right| = 0.5.$$
+
 Afterwards, we calculate the angle $\delta$
-$$ \delta = \frac{\Theta_{i} - \Theta_{\alpha}}{2} = \frac{\pi}{8}. $$
+
+$$ \delta = \frac{\Theta_{i} - \Theta_{\alpha}}{2} = \frac{\pi}{8}.$$
+
 With the angle, the rotation matrix ${}^i R_\alpha$ can be calculated:
+
 $$
 	{}^i R_\alpha = \begin{bmatrix}
 	cos(2\delta) & sin(2\delta) & 0 \\
@@ -63,30 +77,68 @@ $$
 	0 & 0 & 1
 	\end{bmatrix}.
 $$
-Further, the displacement ${}^i _i r_\alpha$ is calculated
+
+Further, the displacement $\prescript{i}{i} r_\alpha$ is calculated
+
 $$
-	{}^i _i r_\alpha = c \cdot b 
-	\begin{bmatrix} -cos(\delta) \\ sin(\delta) \\ 0\end{bmatrix} =
+	\prescript{i}{i} r_\alpha = c \cdot b 
+	\begin{bmatrix} 
+	-cos(\delta) \\ 
+	sin(\delta) \\ 
+	0
+	\end{bmatrix} =
 	0.5 \cdot 2\pi r \cdot \frac{\frac{\pi}{2}}{2\pi}
-	\begin{bmatrix} -cos(\frac{\pi}{8}) \\ sin(\frac{\pi}{8}) \\ 0\end{bmatrix} =
-	\begin{bmatrix} -7.256 \\ 3.006 \\ 0\end{bmatrix}.	
+	\begin{bmatrix} 
+	-cos(\frac{\pi}{8}) \\ 
+	sin(\frac{\pi}{8}) \\ 
+	0
+	\end{bmatrix} =
+	\begin{bmatrix} 
+	-7.256 \\ 
+	3.006 \\ 
+	0
+	\end{bmatrix}.	
 $$
+
 Finally, the corrected position of point $P$, seen from point $T$, can be calculated:
+
 $$
-	{}^i _i r_M = {}^i _i r_\alpha + {}^i R_\alpha \cdot {}^\alpha _\alpha r_M =
-	\begin{bmatrix} -7.256 \\ 3.006 \\ 0\end{bmatrix} + 
+	\prescript{i}{i} r_M = \prescript{i}{i} r_\alpha + {}^i R_\alpha \cdot {}^\alpha _\alpha r_M =
+	\begin{bmatrix} 
+	-7.256 \\ 
+	3.006 \\ 
+	0
+	\end{bmatrix} + 
 	\begin{bmatrix}
 	\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\
 	-\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\
 	0 & 0 & 1
 	\end{bmatrix} \cdot 
-	\begin{bmatrix} -4.137 \\ 0 \\ 0 \end{bmatrix} =
-	\begin{bmatrix} -10.181 \\ 5.931 \\ 0 \end{bmatrix}
+	\begin{bmatrix} 
+	-4.137 \\
+	0 \\ 
+	0 
+	\end{bmatrix} =
+	\begin{bmatrix} 
+	-10.181 \\ 
+	5.931 \\ 
+	0 
+	\end{bmatrix}
 $$
+
 The corrected position is a good approximation but not exact.
 More information can be found in our paper.
 Accuracy can be increased by using
-$${}^i _i r_\alpha = c \cdot b \cdot \frac{|sin(\delta)|}{|\delta|}.$$
+
+$$\prescript{i}{i} r_\alpha = c \cdot b \cdot \frac{|sin(\delta)|}{|\delta|}.$$
+
 Applying again the last two steps, results in the coordinates of 
-$${}^i _i r_M = \begin{bmatrix}-9.996 \\ 5.854 \\ 0\end{bmatrix}.$$
+
+$$\prescript{i}{i} r_M = 
+\begin{bmatrix}
+-9.996 \\ 
+5.854 \\ 
+0
+\end{bmatrix}.$$
+
 Remaining deviations smaller than 0.01 result from rounding to the third decimal place throughout every calculation step.
