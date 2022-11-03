@@ -21,7 +21,7 @@ Once delays or at least a lower bound are known a priori, the delay can be antic
 This increases performance and accuracy of applications relying on the point cloud.
 
 The resulting pipeline: 
-![Lidar distortion correction pipeline](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/figures/distortion_correction_pipeline.png).
+![Lidar distortion correction pipeline](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/figures/distortion_correction_pipeline.png)
 *Providing up-to-date Lidar data: distortion correction for the duration of the scan and the computation time of the correction itself as well as extrapolation of the point cloud considering application dependent time delays.*
 
 More information can be found in [this paper](https://ieeexplore.ieee.org/document/9128372) [1].
