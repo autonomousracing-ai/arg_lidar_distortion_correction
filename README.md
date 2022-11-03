@@ -9,7 +9,7 @@ Measured points appear at wrong distance (straight line movement) and wrong dire
 No distortion           |  Distortion
 :-------------------------:|:-------------------------:
 ![stand still](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/figures/stand_still.png) | ![Lidar distortion](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/figures/distortion.png)
-*No distortion at stand still: raw point cloud in pink matches corrected point cloud in black* | *Distorted point cloud in pink and corrected point cloud in black from Lidar sensor on a moving vehicle.*
+*No distortion at stand still: raw point cloud in pink matches corrected point cloud in black.* | *Distorted point cloud in pink and corrected point cloud in black from Lidar sensor on a moving vehicle.*
 
 The distortion error is increased with faster movement, meaning higher linear or angular velocity.
 Measurements from recent scanning positions exhibit less errors than the ones from the start of the scan.
@@ -20,8 +20,8 @@ Additional inconsistency may be introduced by processing delays of applications 
 Once delays or at least a lower bound are known a priori, the delay can be anticipated by converting/extrapolating the measurement to future frames.
 This increases performance and accuracy of applications relying on the point cloud.
 
-The resulting pipeline: 
 ![Lidar distortion correction pipeline](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/figures/distortion_correction_pipeline.png)
+
 *Providing up-to-date Lidar data: distortion correction for the duration of the scan and the computation time of the correction itself as well as extrapolation of the point cloud considering application dependent time delays.*
 
 More information can be found in [this paper](https://ieeexplore.ieee.org/document/9128372) [1].
