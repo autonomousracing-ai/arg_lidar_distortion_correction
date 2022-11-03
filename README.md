@@ -29,15 +29,7 @@ More information can be found in [this paper](https://ieeexplore.ieee.org/docume
 [1] Renzler, T., Stolz, M., Schratter, M., and Watzenig, D. "Increased accuracy for fast moving LiDARS: Correction of distorted point clouds." 2020 IEEE International Instrumentation and Measurement Technology Conference (I2MTC). IEEE, 2020.
 
 
-## ROS Node
-
-The repository code contains a fully operational ROS node for Lidar distortion correction.
-It requires a point cloud (sensor_msgs::PointCloud2) and odometry data (geometry_msgs::TwistStamped).
-The point cloud may also be already preprocessed, e.g., filtered: measurement angles determining the amount of correction are calculated based on (x,y) information of the point cloud.
-Angular and linear velocity are averaged between current and previous measurement.
-The consideration of processing delays can be enabled/disabled by the parameter timing_correction.
-
-## Example
+## Simple example
 
 We assume that a 360° scanning LiDAR sensor (
 $\alpha_{\text{start}} = 0°$, 
@@ -142,3 +134,12 @@ $$\prescript{i}{i} r_M =
 \end{bmatrix}.$$
 
 Remaining deviations smaller than 0.01 result from rounding to the third decimal place throughout every calculation step.
+
+
+## ROS Node
+
+The repository code contains a fully operational ROS node for Lidar distortion correction.
+It requires a point cloud (sensor_msgs::PointCloud2) and odometry data (geometry_msgs::TwistStamped).
+The point cloud may also be already preprocessed, e.g., filtered: measurement angles determining the amount of correction are calculated based on (x,y) information of the point cloud.
+Angular and linear velocity are averaged between current and previous measurement.
+The consideration of processing delays can be enabled/disabled by the parameter timing_correction.
