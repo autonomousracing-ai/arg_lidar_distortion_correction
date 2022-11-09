@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- general configuration parameters -->
+    <arg name="points_in" default="/os1_cloud_node/points"/>
+    <arg name="twist_in" default="/devbot/twist" />
+    <arg name="points_out" default="/os1_cloud_node/points_corrected" />
+    <arg name="timing_correction" default="false" />
+    <arg name="rotation_frequency" default="20" />
+
+    <node pkg="arg_distortion_correction" name="arg_distortion_correction_general" type="arg_distortion_correction_general" output="screen">
+      <remap from="points_in" to="$(arg points_in)"/>
+      <remap from="twist_in" to="$(arg twist_in)" />
+      <remap from="points_out" to="$(arg points_out)" /> 
+      <param name="timing_correction" type="bool" value="$(arg timing_correction)"/>
+      <param name="rotation_frequency" type="int" value="$(arg rotation_frequency)"/>
+    </node>
+
+</launch>
