@@ -168,3 +168,7 @@ Terminal 3 - Visualization:
 $ source /opt/ros/melodic/setup.bash
 $ rviz -d ~/ros/lidar_distortion_ws/src/lidar_distortion_correction/rviz/rviz_config.rviz 
 ```
+
+Note: All points of the point cloud get corrected according to the linear and angular speed of the Lidar sensor.
+This means that measured points that move together with the Lidar sensor get distorted, e.g., parts of the vehicle like the rear wing.
+This effect can be easily prevented by filtering the point cloud appropriately beforehand, e.g., removing points in the immediate vicinity of the sensor.
