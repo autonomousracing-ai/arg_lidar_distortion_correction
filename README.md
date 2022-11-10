@@ -143,3 +143,28 @@ It requires a point cloud (sensor_msgs::PointCloud2) and odometry data (geometry
 The point cloud may also be already preprocessed, e.g., filtered: measurement angles determining the amount of correction are calculated based on (x,y) information of the point cloud.
 Angular and linear velocity are averaged between current and previous measurement.
 The consideration of processing delays can be enabled/disabled by the parameter timing_correction.
+
+Terminal 1 - Execution:
+```
+$ source /opt/ros/melodic/setup.bash
+$ mkdir ~/lidar_distortion_ws
+$ cd ~/lidar_distortion_ws
+$ catkin_make
+$ cd src
+$ git clone https://github.com/autonomousracing-ai/lidar_distortion_correction
+$ catkin_make
+$ source devel/setup.bash
+$ roslaunch arg_distortion_correction arg_distortion_correction_general.launch lidar_localization:=true
+```
+
+Terminal 2 - Data:
+```
+$ source /opt/ros/melodic/setup.bash
+$ rosbag play ~/path_to_data/2022-11-09-19-54-24.bag
+```
+
+Terminal 3 - Visualization
+```
+$ source /opt/ros/melodic/setup.bash
+$ rviz -d ~/ros/lidar_distortion_ws/src/lidar_distortion_correction/rviz/rviz_config.rviz 
+```
