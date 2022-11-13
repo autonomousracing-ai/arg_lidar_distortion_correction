@@ -6,7 +6,7 @@
     <arg name="twist_in" default="/devbot/twist" />
     <arg name="points_out" default="/sensing/lidar/top/points_undistorted" />
 
-    <node pkg="arg_distortion_correction" name="arg_distortion_correction_ouster" type="arg_distortion_correction">
+    <node pkg="arg_lidar_distortion_correction" name="arg_lidar_distortion_correction_ouster" type="arg_lidar_distortion_correction">
       <remap from="points_in" to="$(arg points_in)"/>
       <remap from="twist_in" to="$(arg twist_in)" />
       <remap from="points_out" to="$(arg points_out)" />

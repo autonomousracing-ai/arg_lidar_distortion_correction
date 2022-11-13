@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>arg_distortion_correction</name>
+  <name>arg_lidar_distortion_correction</name>
   <version>1.0.0</version>
   <description>Lidar Distortion Correction</description>
 
