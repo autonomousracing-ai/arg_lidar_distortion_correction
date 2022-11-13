@@ -44,7 +44,7 @@ The LiDAR records $P$ at
 
 $$\prescript{\alpha}{\alpha} r_{M} = \begin{bmatrix} -4.137 & 0 & 0 \end{bmatrix}^T.$$
 
-![Lidar distortion example](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/docfigures/distortion_example.png)
+![Lidar distortion example](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/doc/figures/distortion_example.png)
 
 At position $E$, once the whole point cloud is available, the distortion correction needs to be applied: the recorded coordinates of $P$ are not valid anymore.
 All in the following steps used equations are explained in detail in our paper.
