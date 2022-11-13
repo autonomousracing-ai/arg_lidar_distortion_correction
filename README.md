@@ -8,7 +8,7 @@ Measured points appear at wrong distance (straight line movement) and wrong dire
 
 No distortion           |  Distortion
 :-------------------------:|:-------------------------:
-![stand still](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/figures/stand_still.png) | ![Lidar distortion](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/figures/distortion.png)
+![stand still](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/doc/figures/stand_still.png) | ![Lidar distortion](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/doc/figures/distortion.png)
 *No distortion at stand still: raw point cloud in pink matches corrected point cloud in black.* | *Distorted point cloud in pink and corrected point cloud in black from Lidar sensor on a moving vehicle.*
 
 The distortion error is increased with faster movement, meaning higher linear or angular velocity.
@@ -20,7 +20,7 @@ Additional inconsistency may be introduced by processing delays of applications 
 Once delays or at least a lower bound are known a priori, the delay can be anticipated by converting/extrapolating the measurement to future frames.
 This increases performance and accuracy of applications relying on the point cloud.
 
-![Lidar distortion correction pipeline](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/figures/distortion_correction_pipeline.png)
+![Lidar distortion correction pipeline](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/doc/figures/distortion_correction_pipeline.png)
 
 *Providing up-to-date Lidar data: distortion correction for the duration of the scan and the computation time of the correction itself as well as extrapolation of the point cloud considering application dependent time delays.*
 
@@ -44,7 +44,7 @@ The LiDAR records $P$ at
 
 $$\prescript{\alpha}{\alpha} r_{M} = \begin{bmatrix} -4.137 & 0 & 0 \end{bmatrix}^T.$$
 
-![Lidar distortion example](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/figures/distortion_example.png)
+![Lidar distortion example](https://github.com/autonomousracing-ai/lidar_distortion_correction/blob/main/docfigures/distortion_example.png)
 
 At position $E$, once the whole point cloud is available, the distortion correction needs to be applied: the recorded coordinates of $P$ are not valid anymore.
 All in the following steps used equations are explained in detail in our paper.
