@@ -26,11 +26,7 @@ include_directories(
   include
 )
 
-add_executable(arg_lidar_distortion_correction_ouster src/distortion_correction_ouster.cpp)
-add_dependencies(arg_lidar_distortion_correction_ouster ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(arg_lidar_distortion_correction_ouster ${catkin_LIBRARIES})
-
-add_executable(arg_lidar_distortion_correction src/distortion_correction.cpp)
+add_executable(arg_lidar_distortion_correction src/arg_lidar_distortion_correction.cpp)
 add_dependencies(arg_lidar_distortion_correction ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(arg_lidar_distortion_correction ${catkin_LIBRARIES})
 
@@ -40,7 +36,7 @@ target_link_libraries(arg_lidar_distortion_correction ${catkin_LIBRARIES})
 ## Install ##
 #############
 
-install(TARGETS arg_lidar_distortion_correction arg_lidar_distortion_correction_ouster
+install(TARGETS arg_lidar_distortion_correction
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
